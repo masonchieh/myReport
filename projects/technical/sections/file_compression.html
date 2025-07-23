@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x6a94;&#x6848;&#x58d3;&#x7e2e;&sol;&#x89e3;&#x58d3;&#x7e2e;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h3 id="檔案壓縮解壓縮">檔案壓縮/解壓縮</h3>
+<details>
+    <summary>More...</summary>
+<ul>
+<li>目的：讓檔案傳輸加快，能整包 folder 傳送，並且保留原始目錄結構</li>
+<li>實作種類 (檔案格式)
+<ul>
+<li>.tar</li>
+<li>.tar.zstd</li>
+<li>.tar.gz</li>
+</ul>
+</li>
+<li>種類比較</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">檔案格式</th>
+<th style="text-align:center">檔案大小</th>
+<th style="text-align:center">壓縮耗時</th>
+<th style="text-align:center">解壓縮耗時</th>
+<th style="text-align:right">行為</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">RAW data</td>
+<td style="text-align:center">1.68 GB (1,808,084,766 位元組)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:right">原始檔案</td>
+</tr>
+<tr>
+<td style="text-align:left">.tar</td>
+<td style="text-align:center">1.68 GB (1,808,093,696 位元組)</td>
+<td style="text-align:center">3 secs</td>
+<td style="text-align:center">0.1 secs</td>
+<td style="text-align:right">打包</td>
+</tr>
+<tr>
+<td style="text-align:left">.tar.zstd</td>
+<td style="text-align:center">1.63 GB (1,759,147,749 位元組)</td>
+<td style="text-align:center">5.2 secs</td>
+<td style="text-align:center">0.6 secs</td>
+<td style="text-align:right">打包再壓縮</td>
+</tr>
+<tr>
+<td style="text-align:left">.tar.gz</td>
+<td style="text-align:center">1.63 GB (1,759,291,182 位元組)</td>
+<td style="text-align:center">5~6 mins</td>
+<td style="text-align:center">1.3 secs</td>
+<td style="text-align:right">打包再壓縮</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>重點差異
+<ul>
+<li><em><strong>.tar.gz</strong></em> Gzip 是 <em>Single-Thread</em>，但普遍</li>
+<li><em><strong>.tar.zstd</strong></em> Zstandard 是 <em>Multi-Thread</em>，但尚未普及 (由 Fackbook 開發)</li>
+</ul>
+</li>
+<li>結論
+<ol>
+<li>採用 <em><strong>.tar.zstd</strong></em></li>
+<li>總耗時約 11 秒 (1.68 gb)</li>
+<li>能將完整的目錄檔案結構 copy 過去</li>
+</ol>
+</li>
+</ul>
+</details>
+            
+            
+        </body>
+        </html>

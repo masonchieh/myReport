@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x2705;&#x5df2;&#x5b8c;&#x6210; PR&lpar;Pull Request&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h2 id="已完成-prpull-request">✅已完成 PR(Pull Request)</h2>
+<h3 id="frontend-vue3">👥frontend Vue3</h3>
+<details>
+  <summary>show more...</summary>
+  <table>
+    <thead>
+      <tr>
+        <th style="background-color: #f2f2f2;">項目</th>
+        <th style="background-color: #f2f2f2;">說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">
+          copy/paste/cut ROW<br>
+          (<span style="color:#845C5C;font-weight:bold;">鍵盤 / 滑鼠</span>)
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>單選</li>
+            <li>複製 <mark>鍵盤 Ctrl + c</mark>、<mark>滑鼠 Copy</mark></li>
+            <li>剪下 <mark>鍵盤 Ctrl + x</mark>、<mark>滑鼠 Cut</mark></li>
+            <li>貼上 append 插入 某ROW 的下一筆 <mark>鍵盤 Ctrl + v</mark>、<mark>滑鼠 Paste(append)</mark></li>
+            <li>貼上 overwrite 覆蓋 某ROW <mark>鍵盤 Ctrl + Shift + v</mark>、<mark>滑鼠 Paste(overwrite)</mark></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">PrimeVue</td>
+        <td style="text-align:left;">
+          <ul>
+            <li>APP style</li>
+            <li>Tab分頁WorkSheet、DataTable、Column Filter、</li>
+            <li>輸入元件<br>
+              字串類：string、stringOption、stringMultiOption、string[]、string[][]<br>
+              數字類：float、bigint、number、intOption、intMultiOption<br>
+              日期類：Date、Time、DateTime<br>
+              布林類：boolean、booleanOption
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">更新 6 個 Excel Sheet GUI</td>
+        <td style="text-align:left;">align 新版 sheet</td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">解析 JSON file</td>
+        <td style="text-align:left;">
+          <ul>
+            <li>raw data 是有意義的，不要自動補齊 0 / “” / false 之類的預設值，維持原值</li>
+            <li>import / export file</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">GUI 上的所有選單</td>
+        <td style="text-align:left;">
+          <ul>
+            <li>目前定義在 myConfig.json</li>
+            <li>之後可以同步外部資料來源</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">Add/Del 整筆 Row</td>
+        <td style="text-align:left;">user 可以新增/刪除資料</td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">Row 上下位置移動</td>
+        <td style="text-align:left;">
+          <ul>
+            <li>user 可以上下移動資料順序</li>
+            <li>前後順序有意義 “TestFlow”, “AdditionSpecSort” 要注意匯出的順序差異</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">Column 左右位置移動</td>
+        <td style="text-align:left;">
+          不同 user 關心的欄位順序不同，可建立自己的<span style="color:#845C5C;font-weight:bold;">使用習慣(user profile)</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+<hr>
+<h3 id="️backend-rust">🗄️backend Rust</h3>
+<details>
+  <summary>show more...</summary>
+  <table>
+    <thead>
+      <tr>
+        <th style="background-color: #f2f2f2;">項目</th>
+        <th style="background-color: #f2f2f2;">說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">解析 JSON file</td>
+        <td style="text-align:left;">
+          <ul>
+            <li><font color=red>upload/download</font> OV50H40ABA_FS_60C_RM0301ABK.json</li>
+            <li>同一份json檔，能符合 <font color=red>新/舊版</font>的 Excel 定義 GUI</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">
+          <a href="../technical/technical.html">SQLite local db</a>
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>[users] User Account/Password(AES加密)，系統初始建立帳號( admin / darren / brian / mason )</li>
+            <li>[systemkv] 即時紀錄系統參數</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">AES encrypt/decrypt</td>
+        <td style="text-align:left;">
+          <ul>
+            <li><a href="../technical/technical.html">主邏輯</a></li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+            
+            
+        </body>
+        </html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f4dd;Data Handler - &#x8cc7;&#x6599;&#x8655;&#x7406;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=/#gh-light-mode-only],
+.vscode-light img[src$=/#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=/#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=/#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h2 id="data-handler---資料處理">📝Data Handler - 資料處理</h2>
+<h3 id="ℹ️內容敘述">ℹ️內容敘述</h3>
+<ul>
+<li>
+<p>📌專案目標：整合<mark>異質系統</mark>並自動化輸入/輸出流程，強化資料正確性，資料自動化、防呆、一致性</p>
+</li>
+<li>
+<details>
+<summary>💻技術應用清單</summary>
+<blockquote>
+<ul>
+<li><a href="../../projects/tauri/tauri.html">Tauri</a></li>
+<li><a href="../technical/technical.html">gRPC client/server</a></li>
+<li><a href="../technical/technical.html">SQLite local db</a></li>
+<li><a href="../technical/technical.html">AES encrypt/decrypt</a></li>
+</ul>
+</blockquote>
+</details>
+</li>
+</ul>
+<hr>
+<h3 id="專案狀態完成度">⏳專案狀態完成度</h3>
+<ul>
+<li>✅ 已完成<a href="dataHandler_PR.html">PR</a>：merge code for CI/CD release</li>
+<li>🧑‍🔬 測試中<a href="dataHandler_UAT.html">UAT</a>：通知 user 進行驗證測試</li>
+<li>📨 新需求<a href="dataHandler_AR.html">AR</a>：user 提出 🆕新需求/🐛bug</li>
+</ul>
+<hr>
+<h3 id="benefit">✨Benefit</h3>
+<details>
+<summary>show benefit...</summary>
+  <table>
+    <thead>
+      <tr>
+        <th style="background-color: #f2f2f2;">狀態</th>
+        <th style="background-color: #f2f2f2;">說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">🔍As-Is(現狀)</td>
+        <td style="text-align:left;">
+          <ul>
+            <li>使用 Excel，資料沒有防呆、連動、自動化，User耗時又容易出錯</li>
+            <li>資料來源沒有統一，容易多頭馬車</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">✨To-Be(未來)</td>
+        <td style="text-align:left;">
+          <ul>
+            <li>自動化系統上線後，資料來源統一，輸入介面防呆、連動、自動化，縮短 User 編輯時程，資料又準確</li>
+            <li>可背景同步傳輸數據，加快系統間的整合</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+<hr>
+<h3 id="future-plan未來半年">🎯Future Plan（未來半年）</h3>
+<details>
+  <summary>show plan...</summary>
+<blockquote>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 完成稽核日誌串接</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> 上線內部測試，持續改善使用者體驗</li>
+</ul>
+</blockquote>
+</details>
+<hr>
+<h3 id="使用者-feedback">💬使用者 Feedback</h3>
+<details>
+  <summary>show feedback...</summary>
+<blockquote>
+<ul>
+<li>系統穩定</li>
+<li>操作簡單</li>
+<li>期望能進一步支援更多情境操作</li>
+<li>行動裝置版本</li>
+</ul>
+</blockquote>
+</details>
+<hr>
+<h3 id="圖表顯示">📊圖表顯示</h3>
+<details>
+  <summary>show figure/chart...</summary>
+<ul>
+<li><a href="../../images/say-hi-flowchart.png">流程圖</a></li>
+<li><img src="../../images/sample_gantt.gif" alt="甘特圖"></li>
+</ul>
+</details>
+
+            
+            
+        </body>
+        </html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x6578;&#x5b78;&#x516c;&#x5f0f;&#x7684;&#x66f4;&#x5ee3;&#x6cdb;&#x652f;&#x63f4; &lpar;LaTeX&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=/#gh-light-mode-only],
+.vscode-light img[src$=/#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=/#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=/#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <details>
+  <summary>點我展開更多</summary>
+  <ul>
+    <li>項目 1 <span style="color: red; font-weight: bold;">這段文字會變紅色</span></li>
+    <li>項目 2
+      <div style="border-left: 4px solid orange; padding: 0.5em;">
+        ⚠️ <strong>注意：</strong>這是一個警告區塊。
+      </div>
+    </li>
+    <li>項目 3 <img src="images/sample_gantt.gif" alt="甘特圖" width="100" /></li>
+    <li>項目 4 <mark>這是重點</mark></li>
+    <li>項目 5 <kbd>Ctrl</kbd> + <kbd>S</kbd></li>
+  </ul>
+</details>
+<hr>
+<details>
+  <summary>專業報告的常見結構特點</summary>
+  <li>清晰的層級結構 - 使用<mark>H1-H6</mark>標題建立文件架構</li>
+  <li>數據呈現 - 表格用於展示<mark>關鍵指標</mark>和<mark>比較數據</mark></li>
+  <li>視覺提示 - 使用<mark>引用區塊</mark>、<mark>提示框</mark>來突出<mark>重要資訊</mark></li>
+  <li>程式碼 - 程式碼<mark>區塊展示</mark>技術實作細節</li>
+  <li>任務追蹤 - <mark>勾選清單</mark>顯示<mark>進度狀態</mark></li>
+</details>
+<hr>
+<details>
+  <summary>實用技巧提醒</summary>
+  <li>善用 <kbd>details</kbd> 標籤讓長篇內容可摺疊，提升閱讀體驗</li>
+  <li>表格的對齊功能<kbd>（:---, :---:, ---:）</kbd>讓數據更易讀</li>
+  <li>組合使用 HTML 和 Markdown 可創造更豐富的視覺效果</li>
+  <li>腳註功能適合學術報告或需要詳細說明的文件</li>
+</details>
+<hr>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">左對齊</th>
+<th style="text-align:center">置中對齊</th>
+<th style="text-align:right">右對齊</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">row1內容很長的字串1</td>
+<td style="text-align:center">row1內容很長的字串2</td>
+<td style="text-align:right">row1內容很長的字串3</td>
+</tr>
+<tr>
+<td style="text-align:left">row2-1</td>
+<td style="text-align:center">row2-2</td>
+<td style="text-align:right">row2-3</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>粗體文字</strong></td>
+<td style="text-align:center"><em>斜體文字</em></td>
+<td style="text-align:right"><s>刪除線文字</s></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="數學公式的更廣泛支援-latex">數學公式的更廣泛支援 (LaTeX)</h3>
+<h4 id="使用--符號來表示行內數學公式">使用 $ 符號來表示行內數學公式</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E = mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<h4 id="如果需要更複雜的公式通常會使用獨立的數學區塊">如果需要更複雜的公式，通常會使用獨立的<mark>數學區塊</mark></h4>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mi>n</mi><mo stretchy="false">!</mo></mrow><mrow><mi>k</mi><mo stretchy="false">!</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mi>k</mi><mo stretchy="false">)</mo><mo stretchy="false">!</mo></mrow></mfrac><mo>=</mo><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mi>n</mi><mi>k</mi></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">/frac{n!}{k!(n-k)!} = /binom{n}{k}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.3074em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">!</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)!</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mclose">!</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></p>
+<hr>
+<h1 id="主標題-h1---通常用於文件標題">主標題 (H1) - 通常用於文件標題</h1>
+<h2 id="章節標題-h2---主要章節">章節標題 (H2) - 主要章節</h2>
+<h3 id="子章節-h3---次要章節">子章節 (H3) - 次要章節</h3>
+<h4 id="小節標題-h4---詳細內容">小節標題 (H4) - 詳細內容</h4>
+<h5 id="段落標題-h5---特定主題">段落標題 (H5) - 特定主題</h5>
+<h6 id="最小標題-h6---細節說明">最小標題 (H6) - 細節說明</h6>
+<hr>
+<div style="background-color: #e3f2fd; border-left: 4px solid #2196f3; padding: 1em; margin: 1em 0;">
+  <strong>💡提示：</strong>這是一個自定義的資訊提示框
+</div>
+<hr>
+<div align="center">
+  <strong>這段文字會置中顯示</strong>
+</div>
+<hr>
+<p>儲存：<kbd>Ctrl</kbd> + <kbd>S</kbd></p>
+<p>複製：<kbd>Ctrl</kbd> + <kbd>C</kbd></p>
+<p>貼上：<kbd>Ctrl</kbd> + <kbd>V</kbd></p>
+<p>全選：<kbd>Ctrl</kbd> + <kbd>A</kbd></p>
+<hr>
+<p>專案進度：<progress max="100" style="width: 30px; height: 15px;" value="70"></progress> 70%</p>
+<p>任務完成度：<progress max="100" style="width: 30px; height: 15px;" value="20"></progress> 20%</p>
+<p>進行中：<progress max="100" style="width: 30px; height: 15px;"></progress> ?</p>
+<hr>
+<details>
+  <summary>程式區塊 (Code Blocks) 通常都會用 details 包起來, 因為程式通常都很長</summary>
+  <li><kbd>html</kbd> HTML 語法</li>
+  <li><kbd>css</kbd> CSS 語法</li>
+  <li><kbd>sql</kbd> SQL 語法</li>
+  <li><kbd>json</kbd> JSON 格式</li>
+  <li><kbd>xml</kbd> XML 格式</li>
+  <li><kbd>bash 或 shell</kbd> 命令列</li>
+  <li><kbd>markdown</kbd> Markdown 語法</li>
+<p>這是 <code>行內程式碼</code> 的寫法</p>
+<pre><code>這是一個沒有語法高亮的程式碼區塊
+可以寫多行
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params">name</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">${name}</span>!`</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`Welcome, <span class="hljs-subst">${name}</span>`</span>;
+}
+<span class="hljs-title function_">sayHello</span>(<span class="hljs-string">&quot;World&quot;</span>);
+</code></pre>
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_sum</span>(<span class="hljs-params">numbers</span>):
+  <span class="hljs-string">&quot;&quot;&quot;計算數字列表的總和&quot;&quot;&quot;</span>
+  total = <span class="hljs-built_in">sum</span>(numbers)
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;總和是：<span class="hljs-subst">{total}</span>&quot;</span>)
+  <span class="hljs-keyword">return</span> total
+
+numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+result = calculate_sum(numbers)
+</code></pre>
+<pre><code class="language-rust"><span class="hljs-meta">#[command]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">login_expired_secs</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">u64</span> {
+  <span class="hljs-title function_ invoke__">get_config</span>().<span class="hljs-keyword">await</span>.<span class="hljs-title function_ invoke__">get_login_expired_secs</span>()
+}
+<span class="hljs-meta">#[command]</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">check_updates</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;<span class="hljs-type">String</span>&gt; {
+  <span class="hljs-title function_ invoke__">check_for_updates</span>().<span class="hljs-keyword">await</span>
+}
+</code></pre>
+</details>
+<hr>
+<blockquote>
+<p>這是單行引用區塊 (Blockquotes)</p>
+</blockquote>
+<blockquote>
+<p>這是多行引用區塊, 第 1 行<br>
+第 2 行<br>
+第 3 行</p>
+</blockquote>
+<blockquote>
+<p>巢狀引用區塊, 第 1 層</p>
+<blockquote>
+<p>第 2 層</p>
+<blockquote>
+<p>第 3 層</p>
+<blockquote>
+<p>第 4 層</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<h3 id="引用標題-引用區塊內的格式化">引用標題, 引用區塊內的格式化</h3>
+<p>這是引用內容，可以包含 <strong>粗體</strong> 和 <em>斜體</em></p>
+<ul>
+<li>也可以包含清單</li>
+<li>和其他 Markdown 語法</li>
+</ul>
+<p><code>單行程式碼</code></p>
+<pre><code>多行程式碼
+</code></pre>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>📋執行摘要</strong></p>
+<p>本報告分析了 2024 年第四季的銷售數據，主要發現包括：</p>
+<ul>
+<li>總銷售額較去年同期成長 15%</li>
+<li>線上銷售佔比達到 60%</li>
+<li>客戶滿意度提升至 4.2/5.0</li>
+</ul>
+<p>建議持續投資數位行銷策略以維持成長動能</p>
+</blockquote>
+<hr>
+<h3>清單類型</h3>
+<p><mark>無序清單：</mark>使用<kbd>-</kbd> 或 <kbd>*</kbd> 或 <kbd>+</kbd></p>
+<ul>
+<li>項目1</li>
+<li>項目2</li>
+</ul>
+<ul>
+<li>巢狀項目3
+<ul>
+<li>3-1
+<ul>
+<li>3-1-1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>項目4</li>
+</ul>
+<ul>
+<li>項目5</li>
+<li>項目6</li>
+</ul>
+<p><mark>有序清單：</mark>使用<kbd>數字加句點</kbd></p>
+<ol>
+<li>項目1</li>
+<li>項目2</li>
+<li>巢狀項目3
+<ol>
+<li>項目3-1
+<ol>
+<li>項目3-1-1</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>項目4</li>
+</ol>
+<p><mark>定義清單：</mark></p>
+<dl>
+  <dt>API</dt>
+  <dd>Application Programming Interface，應用程式介面</dd>
+  <dt>JSON</dt>
+  <dd>JavaScript Object Notation，一種輕量級的資料交換格式</dd>
+  <dt>REST</dt>
+  <dd>Representational State Transfer，表現層狀態轉移</dd>
+</dl>
+<p><mark>任務清單：</mark>使用<kbd>- [ ]</kbd> 和 <kbd>- [x]</kbd></p>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> 任務1, 未完成</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 任務2, <strong>已完成</strong></li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> 任務3, <mark>執行中</mark></li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> <font color='#C06969'>待辦事項</font>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> 子任務1, 執行中 <progress max="100" style="width: 30px; height: 15px;" value="70"></progress> 70%</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 子任務2, <kbd>已完成</kbd></li>
+</ul>
+</li>
+</ul>
+<p>標準 Markdown 任務清單只有兩種</p>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> 未完成（空白方框）</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 已完成（打勾方框）</li>
+</ul>
+<p>其他 <kbd>- [-]</kbd> <kbd>- [&gt;]</kbd> <kbd>- [!]</kbd>等變化不是標準語法，只有少數特定平台支援</p>
+<ul>
+<li>[-] 試試看</li>
+<li>[&gt;] 不支援</li>
+<li>[!] 不支援</li>
+</ul>
+<details>
+  <summary><mark>任務清單</mark>中，如果需要更多狀態，使用<kbd>表情符號</kbd>會更通用</summary>
+  ✅已完成 ⏳進行中 ❌已取消 (未完成) ⚠️需要注意 (重要提醒) 🔄(等待中/循環箭頭/持續) ℹ️提示 📋待辦項目 💡注意事項  📌重要備註 ⚡閃電 ▶️播放按鈕 ⌘Command符號
+  📁文件/資料夾操作(如：複製檔案) ⚙️設定/處理/操作(通用處理) 🛠️工具/修正(如：修正路徑) ✨美化/優化(用於後處理、優化類任務) ✨(閃光/新穎/提升)
+  ⌨️鍵盤 🚀生成/部署(用於生成 HTML、打包) 🐍Python相關(專用於Python腳本) 🐚Shell/Bash相關(專用於Bash腳本) 🧠(大腦/知識/思考) 💻(電腦/技術)
+<blockquote>
+<p>🆕(使用者提出新需求/USER新需求) 📨收到需求表單或訪談記錄 💡需求為建議性功能、非立即性 📝正在撰寫需求規格
+📨<em><strong>2025/07/01 收到新建議</strong></em><br>
+💡建議：在報表介面加入「CSV 匯出」功能<br>
+🔍評估：初步可行，需設計 UI 匯出按鈕  🔍進行需求可行性分析
+⛳規劃納入 2025 Q3 sprint backlog  ⛳已納入下一版本排程</p>
+</blockquote>
+</details>
+<hr>
+<p>連結 (Links): <kbd><a href="URL">連結文字</a></kbd></p>
+<p><a href="https://www.google.com">Google</a></p>
+<p><a href="https://github.com" title="GitHub 首頁">GitHub, 有提示</a></p>
+<hr>
+<p>腳註 (Footnotes)</p>
+<p>這是需要註解的內容<a href="%E4%B8%AD%E9%96%93%E4%B8%8D%E5%8F%AF%E4%BB%A5%E6%9C%89%E4%BB%BB%E4%BD%95%E7%A9%BA%E7%99%BD,%E9%80%99%E6%98%AF%E7%AC%AC%E4%B8%80%E5%80%8B%E8%85%B3%E8%A8%BB%E7%9A%84%E5%85%A7%E5%AE%B9Markdown%E6%98%AF%E4%B8%80%E7%A8%AE%E8%BC%95%E9%87%8F%E7%B4%9A%E6%A8%99%E8%A8%98%E8%AA%9E%E8%A8%80%E7%94%B1JohnGruber%E6%96%BC2004%E5%B9%B4%E5%89%B5%E9%80%A0">^1</a></p>
+<p>還有另一個註解<a href="%E4%B8%AD%E9%96%93%E4%B8%8D%E5%8F%AF%E4%BB%A5%E6%9C%89%E4%BB%BB%E4%BD%95%E7%A9%BA%E7%99%BD,%E9%80%99%E6%98%AF%E7%AC%AC%E4%BA%8C%E5%80%8B%E8%85%B3%E8%A8%BB%E7%9A%84%E5%85%A7%E5%AE%B9%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%8C%85%E5%90%AB**%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%96%87%E5%AD%97**%E5%92%8C%5B%E9%80%A3%E7%B5%90%5D(https://example.com)">^2</a></p>
+<p>命名腳註</p>
+<p>學習Markdown<a href="Markdown%E6%98%AF%E4%B8%80%E7%A8%AE%E8%BC%95%E9%87%8F%E7%B4%9A%E6%A8%99%E8%A8%98%E8%AA%9E%E8%A8%80%EF%BC%8C%E7%94%B1JohnGruber%E6%96%BC2004%E5%B9%B4%E5%89%B5%E9%80%A0">^markdown-note</a>很有用</p>
+<hr>
+<p>表情符號 (Emoji)</p>
+<blockquote>
+<p>打 :smile: 沒有出現笑臉是正常的，因為：
+表情符號短代碼, 如 :smile: 只在特定平台支援</p>
+<blockquote>
+<p>✅ 支援： GitHub、GitLab、Discord、Slack<br>
+❌ 不支援：大多數標準 Markdown 解析器、純文字編輯器<br>
+解決方案：直接使用 Unicode 表情符號 😊 😀 😉 😆<br>
+開啟表情符號面板：</p>
+<blockquote>
+<p>Windows： <kbd>Win</kbd>+<kbd>.</kbd><br>
+Mac： <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>Space</kbd></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>測試您的平台：</p>
+<blockquote>
+<p>如果看到 😊 = 支援 Unicode 表情符號<br>
+如果看到 :smile: = 不支援短代碼<br>
+建議直接使用 Unicode 表情符號（😊）而不是短代碼（:smile:），這樣在所有平台都能正常顯示</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>常用表情符號清單</p>
+<blockquote>
+<p>表情類 😊笑臉 😀開心 😉眨眼 😆大笑 😍愛心眼 🤔思考 😕困惑 😟擔心 😢哭泣 😠生氣</p>
+</blockquote>
+<blockquote>
+<p>手勢類 👍讚 👎不讚 👏拍手 👋揮手 👉指向右 👈指向左 🙏祈禱/感謝 💪肌肉/力量</p>
+</blockquote>
+<blockquote>
+<p>符號類 ⚠️警告 ❗驚嘆號 ❓問號 ℹ️資訊 ✅勾選 ❌錯誤 ⭕圓圈 ☑️選票框勾選 ✖️乘號</p>
+</blockquote>
+<blockquote>
+<p>物件類 📚書籍 💻電腦 📞電話 📧郵件 📅日曆 🗓️日曆 🕐時鐘 💡燈泡 ⚙️齒輪 🔧扳手 🔑鑰匙 🎯(靶心/目標)</p>
+</blockquote>
+<blockquote>
+<p>自然類 🔥火 ⭐星星 ☀️太陽 🌙月亮 ☁️雲朵 ⚡閃電 🌈彩虹 🌱幼苗 🌿草本 🌱(小苗/生長)</p>
+</blockquote>
+<blockquote>
+<p>交通類 🚗汽車 🚌公車 🚆火車 ✈️飛機 🚀火箭 🚲腳踏車</p>
+</blockquote>
+<blockquote>
+<p>使用者 🧪USER測試中 👤USER測試中 🔬USER驗證中 ⏳USER測試中 🛠️功能測試中 🧑‍🔬USER測試進行中 💬USER測試回饋中</p>
+</blockquote>
+<blockquote>
+<p>組合多個符號會更明確 👤🧪⏳使用者測試中…</p>
+</blockquote>
+<blockquote>
+<p>💰(錢袋/收益) 📈(趨勢向上圖/成長) 🌟(星星/亮點/價值) 🚧(施工/進行中) 📊(條形圖/統計) 📝(備忘錄/寫作) 📜(捲軸/歷史文件)</p>
+</blockquote>
+<blockquote>
+<p>🏆(獎盃/成就) 🤝(握手/合作) 🔗(連結/聯繫) 👥(兩個頭像/團隊) 📚(書本/知識/總結) 🧭(指南針/方向) 🐛蟲子 ☁️雲朵 🖼️(圖片/畫框)</p>
+</blockquote>
+<blockquote>
+<p>🖥️(Frontend Code) 🌐(Frontend Web App) ☁️(Backend Service) ⚙️(Backend Logic) 🗄️(檔案櫃/數據庫/後端更側重數據管理) 💾儲存</p>
+</blockquote>
+<blockquote>
+<p>🧱(Brick, 積木) 📦(包裹或箱子) 🏗(Building Construction, 建築工地, 施工中)</p>
+</blockquote>
+</blockquote>
+<hr>
+<p>表情符號使用範例</p>
+<h2 id="項目狀態報告-">項目狀態報告 📊</h2>
+<h3 id="完成項目-">完成項目 ✅</h3>
+<ul>
+<li>資料庫設計 ✅</li>
+<li>API 開發 ✅</li>
+<li>前端介面 ☑️</li>
+</ul>
+<blockquote>
+<h3 id="使用者測試狀態">使用者測試狀態</h3>
+<ul>
+<li>🧪 測試功能 A：user 測試中</li>
+<li>👤 使用者測試流程 B：⏳ 進行中</li>
+<li>🔬 功能 C 正在回饋驗證中</li>
+<li>💬 使用者已回報初步結果，待分析</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="測試進度摘要">測試進度摘要</h3>
+<ul>
+<li>👤 使用者 A：🧪 測試中</li>
+<li>👤 使用者 B：✅ 完成</li>
+<li>👤 使用者 C：⚠️ 問題回報</li>
+<li>👤 使用者 D：⏳ 進行中</li>
+</ul>
+</blockquote>
+<h3 id="進行中項目-">進行中項目 ⏳</h3>
+<ul>
+<li>使用者測試 ⚠️</li>
+<li>效能優化 ⚙️</li>
+</ul>
+<h3 id="待辦項目-">待辦項目 📋</h3>
+<ul>
+<li>文件撰寫 📚</li>
+<li>部署準備 🚀</li>
+</ul>
+<h3 id="注意事項-">注意事項 💡</h3>
+<p>💡 記得在部署前進行完整測試<br>
+🔥 本週需要特別關注效能問題<br></p>
+<hr>
+<p>HTML 標籤在 Markdown 中的使用</p>
+<p>文字格式化</p>
+<p><strong>粗體文字</strong></p>
+<p><em>斜體文字</em></p>
+<p><u>底線文字</u></p>
+<p><s>刪除線文字</s></p>
+<p><mark>重點標記</mark></p>
+<p><small>小字體</small></p>
+<p><sup>上標</sup>
+<sub>下標</sub></p>
+<p>按 <kbd>Ctrl</kbd> + <kbd>C</kbd> 複製</p>
+<p>按 <kbd>Ctrl</kbd> + <kbd>V</kbd> 貼上</p>
+<p>按 <kbd>Enter</kbd> 確認</p>
+<hr>
+<p>自定義樣式區塊</p>
+<div style="background-color: #f0f8ff; border-left: 4px solid #1e90ff; padding: 1em; margin: 1em 0;">
+  <strong>💡 提示</strong><br>
+  這是一個自定義的提示區塊，使用了 HTML 和 CSS 樣式。
+</div>
+<div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 1em; margin: 1em 0;">
+  <strong>⚠️ 警告</strong><br>
+  這是一個警告區塊。
+</div>
+<div style="background-color: #d1ecf1; border-left: 4px solid #17a2b8; padding: 1em; margin: 1em 0;">
+  <strong>ℹ️ 資訊</strong><br>
+  這是一個資訊區塊。
+</div>
+<hr>
+<p>表格進階格式</p>
+<table>
+  <thead>
+    <tr>
+      <th style="background-color: #f2f2f2;">項目</th>
+      <th style="background-color: #f2f2f2;">數量</th>
+      <th style="background-color: #f2f2f2;">狀態</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>項目 A</td>
+      <td style="text-align: center; font-weight: bold;">100</td>
+      <td style="color: green;">✅完成</td>
+    </tr>
+    <tr>
+      <td>項目 B</td>
+      <td style="text-align: center; font-weight: bold;">50</td>
+      <td style="color: orange;">⏳進行中</td>
+    </tr>
+  </tbody>
+</table>
+<div style="display: flex; gap: 1em;">
+  <div style="flex: 1;">
+    <h4>Column 1</h4>
+    <p>第一欄的內容</p>
+  </div>
+  <div style="flex: 1;">
+    <h4>Column 2</h4>
+    <p>第二欄的內容</p>
+  </div>
+</div>
+<hr>
+<p>居中和對齊</p>
+<div align="center">
+  <h3>置中標題</h3>
+  <p>這段文字會置中顯示</p>
+</div>
+<div align="right">
+  <p>這段文字會靠右對齊</p>
+</div>
+<hr>
+<p>HTML 與 Markdown 混合使用範例</p>
+<div style="border: 2px solid #4CAF50; border-radius: 5px; padding: 20px; margin: 20px 0;">
+  <h3 style="color: #4CAF50; margin-top: 0;">📋 專案摘要</h3>
+<p><strong>專案名稱：</strong> 新網站開發</p>
+<p><strong>完成狀態：</strong></p>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 需求分析</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 設計稿製作</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> 前端開發</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> 後端開發</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> 測試階段</li>
+</ul>
+<p><strong>重要提醒：</strong></p>
+<blockquote>
+<p>⚠️ 請注意截止日期為 <mark>2024年12月31日</mark></p>
+</blockquote>
+<p><strong>聯絡人：</strong> <kbd>專案經理</kbd></p>
+</div>
+<hr>
+<figure>
+  <img src="images/jpg_sample.jpg" alt="風景圖" width="300" />
+  <figcaption style="text-align: center; font-style: italic;">
+    圖 1：風景桌布
+  </figcaption>
+</figure>
+<figure>
+  <img src="images/sample_piechart.gif" />
+  <figcaption align="center">
+    <em>圖 2：水果銷售圖</em>
+  </figcaption>
+</figure>
+<hr>
+<p><img src="images/sample_gantt.gif" alt="甘特圖"><br>
+<strong>圖 1：專案A</strong>
+<em>時程表</em></p>
+<hr>
+<p><a href="%E5%9C%A8%E9%80%99%E9%82%8A%E6%89%93%E4%B8%8A#%E5%B0%B1%E6%9C%83%E8%B7%91%E5%87%BA%E9%80%A3%E7%B5%90">撰寫方式, 不要點我, 不會成功</a><br><br>
+<a href="#%E6%9C%80%E5%B0%8F%E6%A8%99%E9%A1%8C-h6---%E7%B4%B0%E7%AF%80%E8%AA%AA%E6%98%8E">跳轉到 最小標題-h6</a></p>
+<hr>
+<h3 id="圖表顯示">圖表顯示</h3>
+<ul>
+<li><a href="images/jpg_sample.jpg">方式1: user另外開啟圖檔</a></li>
+<li><img src="images/jpg_sample.jpg" alt="方式2: 直接顯示圖檔"></li>
+<li></li>
+</ul>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

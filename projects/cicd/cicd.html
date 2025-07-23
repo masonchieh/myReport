@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x2699;&#xfe0f;&#x1f680;CI&sol;CD - &#x6301;&#x7e8c;&#x6574;&#x5408;&lpar;Continuous Integration&comma; CI&rpar;  &#x6301;&#x7e8c;&#x4ea4;&#x4ed8;&#xff0f;&#x90e8;&#x7f72;&lpar;Continuous Delivery&comma; CD&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h2 id="️cicd---持續整合continuous-integration-ci--持續交付部署continuous-delivery-cd">⚙️🚀CI/CD - 持續整合(Continuous Integration, CI)  持續交付／部署(Continuous Delivery, CD)</h2>
+<h3 id="開發進度">開發進度</h3>
+<details>
+    <summary>More...</summary>
+    <table>
+        <thead>
+            <tr>
+                <th style="background-color: #f2f2f2;">狀態</th>
+                <th style="background-color: #f2f2f2;">項目</th>
+                <th style="background-color: #f2f2f2;">說明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="color: orange;">⏳進行中<progress value="0" max="100" style="width: 30px; height: 15px;"></progress>0%</td>
+                <td style="text-align: left; font-weight: bold;">待解：有 2 個問題</td>
+                <td style="text-align: left; font-weight: bold;">
+                    <ul>
+                        <li>1. 資料夾路徑太深，會有壓縮失敗問題</li>
+                        <li>2. 啟動 TaskHandler.exe 會閃退失敗
+                        <font color=red>參考 Raze 的 run.bat 檔案內容，應該是啟動時的相對路徑問題</font>
+                        </li>
+                        <li>Raze 的 run.bat<br>
+                            <pre><code class="language-bash">
+@echo off
+<p>:: Step 1: Record the current folder
+set originFolder=%cd%</p>
+<p>:: Step 2: Jump to the target folder
+set targetFolder=C:\Users\mason\MasonWorkSpace\myGitea\GiteaClient\MDSOffline<br>
+cd /d &quot;%targetFolder%&quot;</p>
+<p>:: Step 3: Run the specified execution file
+set executableFile=TaskHandler.exe
+echo Running %executableFile% in %targetFolder%...
+&quot;%executableFile%&quot;</p>
+<p>:: Step 4: Jump back to the origin folder
+cd /d &quot;%originFolder%&quot;
+echo Returned to the original folder: %originFolder%
+</code></pre>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></p>
+</details>
+<hr>
+<h3 id="開會內容">開會內容</h3>
+<details>
+    <summary>More...</summary>
+<p><a href="../../images/ReleaseValidator%E6%9E%B6%E6%A7%8B%E5%9C%96.png">系統架構圖</a>(感謝 Raze 協助提供)<br>
+<a href="../../images/cicd_meeting_res.jpg">會議結論圖</a></p>
+</details>
+<hr>
+<h3 id="gitea-server">Gitea Server</h3>
+<details>
+    <summary>More...</summary>
+    <table>
+        <thead>
+            <tr>
+                <th style="background-color: #f2f2f2;">狀態</th>
+                <th style="background-color: #f2f2f2;">項目</th>
+                <th style="background-color: #f2f2f2;">說明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="color: green;">✅完成<progress value="100" max="100" style="width: 30px; height: 15px;"></progress>100%</td>
+                <td style="text-align: left; font-weight: bold;">本機架設 Gitea Server</td>
+                <td style="text-align: left; font-weight: bold;">在本機上可隨開機啟動</td>
+            </tr>
+            <tr>
+                <td style="color: orange;">⏳進行中<progress value="80" max="100" style="width: 30px; height: 15px;"></progress>80%</td>
+                <td style="text-align: left; font-weight: bold;">本機 Gitea 與 部門 Gitea sync 同步資料</td>
+                <td style="text-align: left; font-weight: bold;">透過設定, 讓本機 Gitea 主動將資料同步至部門 Gitea</td>
+            </tr>
+        </tbody>
+    </table>
+</details>
+<hr>
+<h3 id="gitea-runner">Gitea Runner</h3>
+<p>待補</p>
+
+            
+            
+        </body>
+        </html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f5c4;&#xfe0f;backend API Rust</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=/#gh-light-mode-only],
+.vscode-light img[src$=/#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=/#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=/#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h2 id="️backend-api-rust">🗄️backend API Rust</h2>
+<h3 id="已完成項目清單">已完成項目清單</h3>
+<details>
+  <summary>More...</summary>
+  <table>
+    <thead>
+      <tr>
+        <th style="background-color: #f2f2f2;">項目</th>
+        <th style="background-color: #f2f2f2;">說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">建立系統開發文件</td>
+        <td style="text-align:left;font-weight:bold;">
+        cargo doc --open
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">proj_root/.cargo/config.toml 設定方式</td>
+        <td style="text-align:left;font-weight:bold;">
+          <ul>
+            <li>這些設定適用於所有編譯模式 (dev, release 共用 profile)<br>
+              <span style="color:#FECC82;font-weight:bold;">[build]</span><br>
+              <u>rustflags = ["--cfg", "tokio_unstable"]</u>
+              <span style="color:#E64747;font-weight:bold;">這個設定才能讓 tokio 提供資訊給 console-subscriber</span>
+            </li>
+            <li>針對 Develop 模式的設定 (dev profile)<br>
+              <span style="color:#FECC82;font-weight:bold;">[profile.dev]</span><br>
+              <u>opt-level = 0</u>  # dev 模式預設為 0<br>
+              <u>debug = true</u>   # dev 模式預設為 true
+            </li>
+            <li>針對 Release 模式的設定 (release profile)<br>
+              <span style="color:#FECC82;font-weight:bold;">[profile.release]</span><br>
+              <span style="color:#E64747;font-weight:bold;">lto、codegen-units 這兩個屬性設定，平時可以註解掉，等真的要 release out 時再開啟即可</span><br>
+              <u>opt-level = 3</u>  # release 模式預設值，通常不用改<br>
+              <u>debug = false</u>  # release 模式通常不包含 debug info<br>
+              <u>lto = "fat"</u><br>
+              <u>codegen-units = 1</u><br>
+              <table>
+                <tr>
+                  <td>
+                    lto、codegen-units 這兩個屬性的設定<br>
+                    <span style="color:#F5C;font-weight:bold;">影響 binary 的執行效率與大小</span><br>
+                  </td>
+                  <td>
+                    如何「證明」有優化效果:<br>
+                    1. 比較「開啟」與「關閉」lto, codegen-units 的 binary 大小，通常會看到縮小 10–30%，尤其對大型應用影響明顯<br>
+                    2. 量測執行效能（Benchmark），可以使用 criterion crate 建立 microbenchmark：<br>
+                      [dev-dependencies]<br>
+                      criterion = "0.5"<br>
+                      cargo bench<br>
+                    3.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    lto 設定說明:
+                  </td>
+                  <td>
+                    1. Whole-program 連結時優化 (Link-Time Optimization, LTO)<br>
+                    2. "fat" 通常提供最佳性能<br>
+                    3. 跨 crate inline 和消除未用程式碼，減少 binary 大小、加快執行效能<br>
+                    4. 但也伴隨著最長的編譯時間和最高的記憶體消耗<br>
+                    5. 對於大型應用程式，編譯時間會顯著增加，大約原本的 2 倍時間<br>
+                    6. 如果 APP 在 release 模式下，仍有性能瓶頸，且可以接受更長的編譯時間，lto = "fat" 是第一個應該嘗試的選項
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    codegen-units 設定說明:
+                  </td>
+                  <td>
+                    1. 程式碼生成單元 (Code Generation Units, CGU)<br>
+                    2. 將 code generation unit 降到 1（編譯器不可併行處理 crate），編譯時間變長、但有機會讓 LLVM 最佳化更有效<br>
+                    3. 設置為 1，與 LTO 結合，可實現更激進優化<br>
+                    4. CGU 決定了 rustc 在編譯時將程式碼分割成多少個獨立的單元<br>
+                    5. 預設情況下，rustc 會生成多個 CGU 以實現並行編譯，從而縮短編譯時間<br>
+                    6.  將其設定為 1 則會強制編譯器將所有程式碼視為一個單一的單元<br>
+                    7.  優點: 當 codegen-units = 1 與 lto（尤其是 lto = "fat"）結合使用時，編譯器能夠進行最全面的跨函數、跨模組優化，因為它沒有 CGU 的邊界限制，可以更好地內聯、死碼消除等，這通常會帶來更好的執行效能<br>
+                    8.  注意事項: 會顯著增加編譯時間，增加至少 2 倍時間，因為無法進行並行編譯，所有優化都必須在一個單元內完成<br>
+                    9.  建議: 如果啟用 lto 並看到了效果，並且願意犧牲編譯時間來獲得最大效能，就應該考慮將 codegen-units 設定為 1
+                  </td>
+                </tr>
+              </table>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">
+          建立監控效能機制<br>tokio async/await
+          <span style="color:#E64747;font-weight:bold;">起因：
+          <ul>
+            <li>vscode IDE <u>中斷點</u> 無法追蹤 tokio thread 會當機</li>
+            <li>目前無有效的 <u>中斷點</u> 設置方式，上下文不好追蹤</li>
+            <li>只能 log file 資訊判讀</li>
+            <li>順便找到這種方式監控程式運作</li>
+          </ul>
+          </span>
+        </td>
+        <td style="text-align:left;font-weight:bold;">
+          <ul>
+            <li>先調整執行 CI/CD 流程的相關 function，並確認可以順利監控</li>
+            <li>結合 5 個 crate 套件
+              <ul>
+                <li>tracing</li>
+                <li>tracing-futures</li>
+                <li>tracing-subscriber</li>
+                <li>console-subscriber</li>
+                <li>tokio-console</li>
+              </ul>
+              <figure>
+                <img src="../../../images/rust_tokio_monitor.png" alt="架構圖" width="500" />
+                <figcaption style="text-align: center; font-style: italic;">監控套件關係圖</figcaption>
+              </figure>
+            </li>
+            <li>
+              安裝並啟動 tokio-console CLI 工具<br>
+              cargo install --locked tokio-console<br>
+              tokio-console http://127.0.0.1:6669<br>
+              port 6669(官方系統預設)<br>
+              port 7002(SLT3, server)<br>
+              port 7003(cslt3, client)
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:left;font-weight:bold;">切分三個 Projects</td>
+        <td style="text-align:left;font-weight:bold;">
+          <ul>
+            <li>slt3lib：提供 cslt3、ovSLT3 必要的共用 function</li>
+            <li>cslt3： 負責處理 client 端所有事務</li>
+            <li>ovSLT3： 負責處理 server 端所有事務</li>
+            <li>client / server 之間的通訊方式：<br>
+              <a href="../sections/grpc.html">實作 gRPC</a><br>
+              <a href="../sections/api.html">實作 APIs client/server</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+            
+            
+        </body>
+        </html>

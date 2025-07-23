@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f4e8;&#x65b0;&#x9700;&#x6c42; AR&lpar;Action&sol;Application Request&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h2 id="新需求-aractionapplication-request">📨新需求 AR(Action/Application Request)</h2>
+<h3 id="frontend-vue3">👥frontend Vue3</h3>
+<details>
+  <summary>show more...</summary>
+  <table>
+    <thead>
+      <tr>
+        <th style="background-color: #f2f2f2;">狀態</th>
+        <th style="background-color: #f2f2f2;">項目</th>
+        <th style="background-color: #f2f2f2;">說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color: orange;">⏳進行中<progress max="100" value=60 style="width: 30px; height: 15px;"></progress>60%</td>
+        <td style="text-align:left;font-weight:bold;">
+          步驟0. 基礎觀念建立
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>
+              積木集合（motion, looks, sound, events, control, sensing, operators, variables, my blocks）<br>
+              需要將這些積木的定義（JSON 或 JavaScript）載入到 Blockly 中
+            </li>
+            <li><u>XML 格式 / JSON 格式</u> 的積木程式碼</li>
+            <li>
+              <u>Blockly 積木</u> 可轉換產生 <span style="background-color: #a52424ff;">javascript / lua / php / python</span> 程式碼<br>
+              code generator 的輸出目標？<br>
+              如果日後有指定目標，code generator 可以再調整方向<br>
+              1. JavaScript → Node.js OR Browser?<br>
+              2. Python → 比較偏向 CLI script OR embedded testing?<br>
+              3. Lua → 是 WebSocket embedded 還是 OpenResty 或一般 script?<br>
+              4. PHP → 是 偏向 CLI testing script
+            </li>
+            <li>實作 <u>Scratch 虛擬機</u> 來執行積木邏輯 (亦可做在 backend rust 端)</li>
+            <li>
+              與系統硬體溝通： Scratch Block 可以控制硬體（例如 IoT 設備）<br>
+              由 backend rust 提供與硬體互動的 API，由 frontend 的 Scratch 積木 call APIs
+            </li>
+            <li>
+              專案開發流程：<br>
+              5. 先專注於 frontend 積木編輯器： Vue3 中成功集成 Blockly 積木，使其能夠顯示工具箱、拖放積木、並產生 XML 或 JSON 格式的程式碼<br>
+              6. 積木定義與行為： 仔細研究 Scratch 的積木定義，並嘗試在 Blockly 中實現它們。這需要一些時間來理解 Scratch 內部的工作方式<br>
+              7. 程式碼執行： 決定如何在 frontend 或 backend 執行積木程式碼。從簡單的 JavaScript 程式碼產生開始，然後逐步考慮更複雜的解釋器<br>
+              8. Tauri 溝通： 一旦 frontend 積木編輯器能夠產生程式碼，就可以 invoke backend 將程式碼發送到 Rust 後端進行儲存、載入或執行
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="color: orange;">⏳進行中<progress max="100" value=30 style="width: 30px; height: 15px;"></progress>30%</td>
+        <td style="text-align:left;font-weight:bold;">
+          建立<span style="background-color: #a52424ff;">積木引擎</span>
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>積木「語意」：custom、logic、loop、test</li>
+            <li>codegen：javascript / lua / php / python</li>
+            <li>workspace：積木 與 codegen 的 mapping handler</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="color: orange;">⏳進行中<progress max="100" style="width: 30px; height: 15px;"></progress>0%</td>
+        <td style="text-align:left;font-weight:bold;">
+          步驟1. 建立基本的 Blockly 工作區
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>設置 Blockly 工作區</li>
+            <li>配置基本的積木類型</li>
+            <li>實現積木拖拽功能</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="color: orange;">⏳進行中<progress max="100" style="width: 30px; height: 15px;"></progress>0%</td>
+        <td style="text-align:left;font-weight:bold;">
+          步驟2. 建立自定義積木
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>測試執行次數設定積木</li>
+            <li>自定義邏輯輸入積木</li>
+            <li>條件判斷積木</li>
+            <li>迴圈控制積木</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="color: orange;">⏳進行中<progress max="100" style="width: 30px; height: 15px;"></progress>0%</td>
+        <td style="text-align:left;font-weight:bold;">
+          步驟3. 實現產生程式碼
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>將積木轉換為可執行的 JavaScript</li>
+            <li>處理測試流程邏輯</li>
+            <li>錯誤處理機制</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="color: orange;">⏳進行中<progress max="100" style="width: 30px; height: 15px;"></progress>0%</td>
+        <td style="text-align:left;font-weight:bold;">
+          步驟4. 建立測試執行器
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>執行產生後的測試程式碼</li>
+            <li>監控測試狀態</li>
+            <li>處理成功/失敗情況</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="color: orange;">⏳進行中<progress max="100" style="width: 30px; height: 15px;"></progress>0%</td>
+        <td style="text-align:left;font-weight:bold;">
+          步驟5. XML 匯入匯出功能
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>將積木配置匯出為 XML</li>
+            <li>從 XML 檔案還原積木配置</li>
+            <li>檔案管理功能</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+<hr>
+<h3 id="️backend-rust">🗄️backend Rust</h3>
+<details>
+  <summary>show more...</summary>
+  <table>
+    <thead>
+      <tr>
+        <th style="background-color: #f2f2f2;">狀態</th>
+        <th style="background-color: #f2f2f2;">項目</th>
+        <th style="background-color: #f2f2f2;">說明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color: orange;">⏳進行中<progress max="100" style="width: 30px; height: 15px;"></progress>0%</td>
+        <td style="text-align:left;font-weight:bold;">
+          建立 APIs
+        </td>
+        <td style="text-align:left;">
+          <ul>
+            <li>提供 frontend 的 Scratch call APIs</li>
+            <li>控制硬體互動</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+            
+            
+        </body>
+        </html>

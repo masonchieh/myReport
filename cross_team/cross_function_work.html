@@ -139,16 +139,51 @@
         </head>
         <body class="vscode-body vscode-light">
             <h2 id="跨部門協作-cross-function-team-work">🤝跨部門協作 Cross-Function Team Work</h2>
-<h3 id="ae-team">AE team</h3>
+<div style="border: 2px solid #4CAF50; border-radius: 5px; padding: 20px; margin: 20px 0;">
+  <h3 style="color: #4CAF50; margin-top: 0;">📋 專案摘要</h3>
+<p><strong>專案名稱：</strong> TP-Link HS300 整合</p>
+<p><strong>目的：</strong> 切換電源開關，控制板卡</p>
+<p><strong>技術：</strong></p>
 <ul>
-<li>None</li>
-<li></li>
+<li>Web APIs</li>
+<li>可直接與設備溝通，溝通方式使用 XOR 加解密協議，包裝 JSON 數據，與官方 APIs 互動</li>
+<li>目前通訊方式混用，部分透過 Edward Wu，部分透過官方 APIs</li>
+<li>實作一個 rust module 與之通訊互動</li>
+</ul>
+<p><strong>重點必要行為：</strong></p>
+<ul>
+<li>設置孔位上下電</li>
+<li>取得孔位當下電流</li>
+<li>取得/監聽設備基本資訊</li>
+</ul>
+<p><strong>注意事項：</strong></p>
+<ul>
+<li>同一 Port 的 開on / 關off  行為, 時間間隔不可太短, 最好等待至少 3 秒</li>
+<li>不同 Port 不會有 on / off 的時間間隔限制</li>
+</ul>
+<p><strong>完成狀態：</strong></p>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 讀取電流資訊，輔助判斷是否已經順利完成切換板卡</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 問板卡狀態是否 ready 才是重點，已經 ready 才能開始進入執行測試狀態</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 前端 vue 顯示開關狀態</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 後端 rust 控制板卡</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> 測試</li>
+</ul>
+<p><strong>重要提醒：</strong></p>
+<blockquote>
+<p>⚠️ 目前暫停開發</p>
+</blockquote>
+<p><strong>聯絡人：</strong> <kbd>Edward Wu</kbd></p>
+</div>
+<hr>
+<h3 id="福委會">福委會</h3>
+<ul>
+<li>協助活動</li>
 </ul>
 <hr>
-<h3 id="資安稽核">資安稽核</h3>
+<h3 id="team-a">Team A</h3>
 <ul>
-<li>支援 <kbd>database log 加密</kbd>與<kbd>稽核查核</kbd></li>
-<li></li>
+<li>暫無</li>
 </ul>
 
             

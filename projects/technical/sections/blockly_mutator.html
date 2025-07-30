@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Blockly Mutator &#x958b;&#x767c;&#x7b46;&#x8a18;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="blockly-mutator-開發筆記">Blockly Mutator 開發筆記</h1>
+<h2 id="-mutator-是什麼">🔍 Mutator 是什麼？</h2>
+<ul>
+<li>Mutator 的核心就是：UI 自變形能力 → DOM 保存 → code generator 對應</li>
+<li>Mutator 是 Blockly 的機制，讓積木能夠根據使用者操作，動態調整其外型與邏輯結構。常見用途包括：
+<ul>
+<li><code>if</code> 積木支援多個 <code>else if</code> 和一個 <code>else</code></li>
+<li><code>function</code> 積木可動態增加參數欄位</li>
+<li><code>switch</code> 積木可加減 case 分支</li>
+</ul>
+</li>
+</ul>
+<h2 id="-mutator-組成要素">📦 Mutator 組成要素</h2>
+<h3 id="1-block-定義中的-mutator-屬性">1. Block 定義中的 <code>mutator</code> 屬性</h3>
+<pre><code class="language-ts">{
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;control_if&#x27;</span>,
+  <span class="hljs-attr">message0</span>: <span class="hljs-string">&#x27;if %1&#x27;</span>,
+  <span class="hljs-attr">args0</span>: [{ <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;input_value&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;IF0&#x27;</span>, <span class="hljs-attr">check</span>: <span class="hljs-string">&#x27;Boolean&#x27;</span> }],
+  <span class="hljs-attr">message1</span>: <span class="hljs-string">&#x27;do %1&#x27;</span>,
+  <span class="hljs-attr">args1</span>: [{ <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;input_statement&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;DO0&#x27;</span> }],
+  <span class="hljs-attr">previousStatement</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">nextStatement</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">mutator</span>: <span class="hljs-string">&#x27;controls_if_mutator&#x27;</span>,
+  <span class="hljs-attr">colour</span>: <span class="hljs-number">210</span>,
+  <span class="hljs-attr">tooltip</span>: <span class="hljs-string">&#x27;根據條件決定是否執行對應程式碼&#x27;</span>,
+  <span class="hljs-attr">helpUrl</span>: <span class="hljs-string">&#x27;https://your-docs.com/block/control_if&#x27;</span>,
+}
+</code></pre>
+<pre><code class="language-ts"><span class="hljs-comment">/**
+ * 擴展 Blockly Block 介面, 以支援 mutator 方法
+ * - mutator 定義說明：Mutator 是 Blockly 積木的「自定義變形機制」，讓積木可以動態 `擴充` 或 `縮減` 其輸入結構
+ * - 主要用途：
+ *   - 增加/移除 input 值：例如 if 條件可以有多個 else if 或一個 else
+ *   - 設定欄位數量或結構：如 function declaration 的參數數量動態增減
+ *   - 動態儲存變異狀態：`mutationToDom()` / `domToMutation()` 可讓積木保存 UI 配置狀態
+ * - 積木行為轉換：
+ *   - 沒有 Mutator：
+ *     - 結構固定
+ *     - 欄位數目一致
+ *     - 較難支援複雜流程
+ *   - 有 Mutator：
+ *     - 結構可變
+ *     - 可以根據使用者需求自動擴充欄位或內容
+ *     - 支援像「多重 if 條件」、「多參數函式」、「可變選項列表」等複雜配置
+ * - Blockly 如何使用 Mutator：
+ *   - Blockly 對 mutator 的支援透過以下幾個元件：
+ *     - `mutator 屬性` → 在 block 定義中, 指名用哪個 mutator
+ *     - defineBlocksWithJsonArray() → 用來定義 mutator 內部用的控制積木（如 controls_if_if, controls_if_elseif）
+ *     - registerMutator() → 註冊 Mutator mixin 的行為定義，包括 `compose()` `updateShape_()` `mutationToDom()` `domToMutation()`
+ * - 結論：Mutator 是 Blockly 對「可變結構積木」的官方機制，適用於所有 UI 可配置型積木。你定義的 control_if 就是一個 Mutator 的最佳範例，支援多條件、多流程、彈性邏輯
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">BlockWithMutator</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Blockly</span>.<span class="hljs-title class_">Block</span> {
+  <span class="hljs-attr">elseifCount_</span>: <span class="hljs-built_in">number</span>;
+  <span class="hljs-attr">elseCount_</span>: <span class="hljs-built_in">number</span>;
+  rebuildShape_?: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span>;
+  updateShape_?: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span>; <span class="hljs-comment">// 設為可選，並在調用時做空值檢查</span>
+
+  <span class="hljs-comment">// 以下是新增的 mutator 相關方法</span>
+  <span class="hljs-title function_">mutationToDom</span>(): <span class="hljs-title class_">Element</span>;
+  <span class="hljs-title function_">domToMutation</span>(<span class="hljs-attr">xmlElement</span>: <span class="hljs-title class_">Element</span>): <span class="hljs-built_in">void</span>;
+  <span class="hljs-title function_">decompose</span>(<span class="hljs-attr">workspace</span>: <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Workspace</span>): <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Block</span>;
+  <span class="hljs-title function_">compose</span>(<span class="hljs-attr">containerBlock</span>: <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Block</span>): <span class="hljs-built_in">void</span>;
+  <span class="hljs-title function_">saveConnections</span>(<span class="hljs-attr">containerBlock</span>: <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Block</span>): <span class="hljs-built_in">void</span>;
+  <span class="hljs-comment">// 將 reconnectChildBlocks_ 移到這裡，因為它在 mutator 混入中使用</span>
+  reconnectChildBlocks_?: <span class="hljs-function">(<span class="hljs-params">valueConnections: (Blockly.Connection | <span class="hljs-literal">null</span>)[], statementConnections: (Blockly.Connection | <span class="hljs-literal">null</span>)[]</span>) =&gt;</span> <span class="hljs-built_in">void</span>;
+}
+</code></pre>
+<pre><code class="language-ts"><span class="hljs-comment">/** 初始化所有`邏輯`積木 */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">initLogicBlocks</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-title class_">Blockly</span>.<span class="hljs-title function_">defineBlocksWithJsonArray</span>([
+    control_if,
+  ]);
+
+  <span class="hljs-comment">// 註冊 if 的 mutator</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-attr">CONTROLS_IF_MUTATOR_MIXIN</span>: <span class="hljs-built_in">any</span> = { <span class="hljs-comment">// 使用 any 暫時規避類型檢查問題，或詳細定義 BlockWithMutator</span>
+    <span class="hljs-attr">elseifCount_</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">elseCount_</span>: <span class="hljs-number">0</span>,
+
+    <span class="hljs-attr">mutationToDom</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span>: BlockWithMutator</span>): <span class="hljs-title class_">Element</span> {
+      <span class="hljs-comment">// 修正：即使沒有變異，也返回一個空的 &lt;mutation/&gt; 元素，而不是 null</span>
+      <span class="hljs-keyword">const</span> container = <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">utils</span>.<span class="hljs-property">xml</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;mutation&#x27;</span>);
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span>) {
+        container.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;elseif&#x27;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span>.<span class="hljs-title function_">toString</span>());
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">elseCount_</span>) {
+        container.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;else&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>);
+      }
+      <span class="hljs-keyword">return</span> container;
+    },
+
+    <span class="hljs-attr">domToMutation</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span>: BlockWithMutator, xmlElement: Element</span>) {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span> = <span class="hljs-built_in">parseInt</span>(xmlElement.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">&#x27;elseif&#x27;</span>) || <span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-number">10</span>);
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseCount_</span> = <span class="hljs-built_in">parseInt</span>(xmlElement.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">&#x27;else&#x27;</span>) || <span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-number">10</span>);
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">updateShape_</span>?.(); <span class="hljs-comment">// 使用 updateShape_ 來重建積木外形</span>
+    },
+
+    <span class="hljs-comment">/**
+     * Creates the mutator&#x27;s dialog for adding/removing conditions.
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">!Blockly.Workspace</span>} workspace The workspace to place the mutator&#x27;s
+     * blocks in.
+     * <span class="hljs-doctag">@return</span> {<span class="hljs-type">!Blockly.Block</span>} The root block in the mutator dialog.
+     */</span>
+    <span class="hljs-attr">decompose</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span>: BlockWithMutator, workspace: Blockly.Workspace</span>) {
+      <span class="hljs-keyword">const</span> containerBlock = workspace.<span class="hljs-title function_">newBlock</span>(<span class="hljs-string">&#x27;controls_if_if&#x27;</span>);
+      <span class="hljs-comment">// 修正：移除 .initSvg()，新版 Blockly 會自動處理 containerBlock.initSvg();</span>
+      <span class="hljs-keyword">let</span> connection = containerBlock.<span class="hljs-property">nextConnection</span>;
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span>; i++) {
+        <span class="hljs-keyword">const</span> elseifBlock = workspace.<span class="hljs-title function_">newBlock</span>(<span class="hljs-string">&#x27;controls_if_elseif&#x27;</span>);
+        <span class="hljs-comment">// 修正：移除 .initSvg()，新版 Blockly 會自動處理 elseifBlock.initSvg();</span>
+        <span class="hljs-keyword">if</span> (connection) { <span class="hljs-comment">// 確保 connection 存在</span>
+          connection.<span class="hljs-title function_">connect</span>(elseifBlock.<span class="hljs-property">previousConnection</span>!);
+        }
+        connection = elseifBlock.<span class="hljs-property">nextConnection</span>;
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">elseCount_</span>) {
+        <span class="hljs-keyword">const</span> elseBlock = workspace.<span class="hljs-title function_">newBlock</span>(<span class="hljs-string">&#x27;controls_if_else&#x27;</span>);
+        <span class="hljs-comment">// 修正：移除 .initSvg()，新版 Blockly 會自動處理 elseBlock.initSvg();</span>
+        <span class="hljs-keyword">if</span> (connection) { <span class="hljs-comment">// 確保 connection 存在</span>
+          connection.<span class="hljs-title function_">connect</span>(elseBlock.<span class="hljs-property">previousConnection</span>!);
+        }
+      }
+      <span class="hljs-keyword">return</span> containerBlock;
+    },
+
+    <span class="hljs-comment">/**
+     * Reconfigure this block based on the mutator dialog&#x27;s blocks.
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">!Blockly.Block</span>} containerBlock Root block in mutator.
+     */</span>
+    <span class="hljs-attr">compose</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span>: BlockWithMutator, containerBlock: Blockly.Block</span>) {
+      <span class="hljs-comment">// 斷開所有舊的連接並保存</span>
+      <span class="hljs-keyword">const</span> <span class="hljs-attr">valueConnections</span>: (<span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Connection</span> | <span class="hljs-literal">null</span>)[] = [<span class="hljs-literal">null</span>];
+      <span class="hljs-keyword">const</span> <span class="hljs-attr">statementConnections</span>: (<span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Connection</span> | <span class="hljs-literal">null</span>)[] = [<span class="hljs-literal">null</span>];
+
+      <span class="hljs-comment">// 保存現有 IF/DO 連接</span>
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span>; i++) {
+        <span class="hljs-keyword">const</span> inputIf = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;IF&#x27;</span> + i);
+        <span class="hljs-keyword">const</span> inputDo = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;DO&#x27;</span> + i);
+        <span class="hljs-keyword">if</span> (inputIf?.<span class="hljs-property">connection</span>) {
+          valueConnections.<span class="hljs-title function_">push</span>(inputIf.<span class="hljs-property">connection</span>.<span class="hljs-property">targetConnection</span>);
+        }
+        <span class="hljs-keyword">if</span> (inputDo?.<span class="hljs-property">connection</span>) {
+          statementConnections.<span class="hljs-title function_">push</span>(inputDo.<span class="hljs-property">connection</span>.<span class="hljs-property">targetConnection</span>);
+        }
+      }
+
+      <span class="hljs-comment">// 保存 ELSE 連接</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">elseCount_</span>) {
+        <span class="hljs-keyword">const</span> elseInput = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;ELSE&#x27;</span>);
+        <span class="hljs-keyword">if</span> (elseInput?.<span class="hljs-property">connection</span>) {
+          statementConnections.<span class="hljs-title function_">push</span>(elseInput.<span class="hljs-property">connection</span>.<span class="hljs-property">targetConnection</span>);
+        }
+      }
+
+      <span class="hljs-comment">// 重設 elseif 和 else 計數</span>
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span> = <span class="hljs-number">0</span>;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseCount_</span> = <span class="hljs-number">0</span>;
+
+      <span class="hljs-comment">// 遍歷 mutator 中的積木，更新計數</span>
+      <span class="hljs-keyword">let</span> childBlock = containerBlock.<span class="hljs-property">nextConnection</span>?.<span class="hljs-title function_">targetBlock</span>();
+      <span class="hljs-keyword">while</span> (childBlock) {
+        <span class="hljs-keyword">switch</span> (childBlock.<span class="hljs-property">type</span>) {
+          <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;controls_if_elseif&#x27;</span>:
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span>++;
+            <span class="hljs-keyword">break</span>;
+          <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;controls_if_else&#x27;</span>:
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseCount_</span>++;
+            <span class="hljs-keyword">break</span>;
+          <span class="hljs-attr">default</span>:
+            <span class="hljs-keyword">break</span>;
+        }
+        childBlock = childBlock.<span class="hljs-property">nextConnection</span>?.<span class="hljs-title function_">targetBlock</span>();
+      }
+
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">updateShape_</span>?.(); <span class="hljs-comment">// 根據新的計數重建形狀</span>
+
+      <span class="hljs-comment">// 重新連接子積木</span>
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">reconnectChildBlocks_</span>?.(valueConnections, statementConnections);
+    },
+
+    <span class="hljs-comment">/**
+     * Store pointers to any connected child blocks.
+     * <span class="hljs-doctag">@param</span> {<span class="hljs-type">!Blockly.Block</span>} _containerBlock The container block in
+     * the mutator.
+     * <span class="hljs-doctag">@this</span> {<span class="hljs-type">Blockly.Block</span>}
+     */</span>
+    <span class="hljs-attr">saveConnections</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span>: BlockWithMutator, _containerBlock: Blockly.Block</span>) {
+      <span class="hljs-comment">// Not typically needed for simple if mutator, as connections are handled in compose.</span>
+      <span class="hljs-comment">// But can be used to store connections for blocks that might be removed during compose.</span>
+    },
+
+    <span class="hljs-attr">updateShape_</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span>: BlockWithMutator</span>) {
+      <span class="hljs-comment">// 移除所有額外的輸入</span>
+      <span class="hljs-comment">// 移除現有的 IF/DO 輸入，除了 IF0/DO0</span>
+      <span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">while</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;IF&#x27;</span> + i)) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">removeInput</span>(<span class="hljs-string">&#x27;IF&#x27;</span> + i);
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">removeInput</span>(<span class="hljs-string">&#x27;DO&#x27;</span> + i);
+        i++;
+      }
+      <span class="hljs-comment">// 移除 ELSE 輸入</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;ELSE&#x27;</span>)) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">removeInput</span>(<span class="hljs-string">&#x27;ELSE&#x27;</span>);
+      }
+
+      <span class="hljs-comment">// 重建 elseif 輸入</span>
+      <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span>; i++) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">appendValueInput</span>(<span class="hljs-string">&#x27;IF&#x27;</span> + i)
+            .<span class="hljs-title function_">setCheck</span>(<span class="hljs-string">&#x27;Boolean&#x27;</span>)
+            .<span class="hljs-title function_">appendField</span>(<span class="hljs-string">&#x27;else if&#x27;</span>);
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">appendStatementInput</span>(<span class="hljs-string">&#x27;DO&#x27;</span> + i)
+            .<span class="hljs-title function_">appendField</span>(<span class="hljs-string">&#x27;do&#x27;</span>);
+      }
+
+      <span class="hljs-comment">// 重建 else 輸入</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">elseCount_</span>) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">appendStatementInput</span>(<span class="hljs-string">&#x27;ELSE&#x27;</span>)
+            .<span class="hljs-title function_">appendField</span>(<span class="hljs-string">&#x27;else&#x27;</span>);
+      }
+    },
+
+    <span class="hljs-attr">reconnectChildBlocks_</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">
+      <span class="hljs-variable language_">this</span>: BlockWithMutator,
+      valueConnections: (Blockly.Connection | <span class="hljs-literal">null</span>)[],
+      statementConnections: (Blockly.Connection | <span class="hljs-literal">null</span>)[]
+    </span>) {
+      <span class="hljs-comment">// 重新連接 IF/DO 輸入 (包括 IF0/DO0)</span>
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span>; i++) { <span class="hljs-comment">// 注意這裡從 0 開始，因為 IF0/DO0 也要處理</span>
+        <span class="hljs-keyword">const</span> valueInput = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;IF&#x27;</span> + i);
+        <span class="hljs-keyword">const</span> statementInput = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;DO&#x27;</span> + i);
+        
+        <span class="hljs-keyword">if</span> (valueInput?.<span class="hljs-property">connection</span> &amp;&amp; valueConnections[i]) {
+          <span class="hljs-keyword">try</span> {
+            valueInput.<span class="hljs-property">connection</span>.<span class="hljs-title function_">connect</span>(valueConnections[i]!);
+          } <span class="hljs-keyword">catch</span> (e) {
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">&#x27;Failed to reconnect value input IF&#x27;</span> + i + <span class="hljs-string">&#x27;:&#x27;</span>, e);
+          }
+        }
+        
+        <span class="hljs-keyword">if</span> (statementInput?.<span class="hljs-property">connection</span> &amp;&amp; statementConnections[i]) {
+          <span class="hljs-keyword">try</span> {
+            statementInput.<span class="hljs-property">connection</span>.<span class="hljs-title function_">connect</span>(statementConnections[i]!);
+          } <span class="hljs-keyword">catch</span> (e) {
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">&#x27;Failed to reconnect statement input DO&#x27;</span> + i + <span class="hljs-string">&#x27;:&#x27;</span>, e);
+          }
+        }
+      }
+
+      <span class="hljs-comment">// 重新連接 ELSE 輸入 (如果存在)</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">elseCount_</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;ELSE&#x27;</span>)) {
+        <span class="hljs-keyword">const</span> elseInput = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInput</span>(<span class="hljs-string">&#x27;ELSE&#x27;</span>);
+        <span class="hljs-comment">// else 的連接是 statementConnections 陣列的最後一個元素</span>
+        <span class="hljs-comment">// 這裡需要確保索引正確，因為 valueConnections 和 statementConnections 是針對 IF/DO 的，</span>
+        <span class="hljs-comment">// ELSE 的索引會是 elseifCount_ + 1</span>
+        <span class="hljs-keyword">const</span> elseIndex = <span class="hljs-variable language_">this</span>.<span class="hljs-property">elseifCount_</span> + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">const</span> lastStatementConnection = statementConnections[elseIndex];
+        
+        <span class="hljs-keyword">if</span> (elseInput?.<span class="hljs-property">connection</span> &amp;&amp; lastStatementConnection) {
+          <span class="hljs-keyword">try</span> {
+            elseInput.<span class="hljs-property">connection</span>.<span class="hljs-title function_">connect</span>(lastStatementConnection);
+          } <span class="hljs-keyword">catch</span> (e) {
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">&#x27;Failed to reconnect else input:&#x27;</span>, e);
+          }
+        }
+      }
+    },
+  };
+
+  <span class="hljs-comment">// 註冊 mutator</span>
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Extensions</span>.<span class="hljs-title function_">registerMutator</span>(
+      <span class="hljs-string">&#x27;controls_if_mutator&#x27;</span>,
+      <span class="hljs-variable constant_">CONTROLS_IF_MUTATOR_MIXIN</span>,
+      <span class="hljs-literal">undefined</span>, <span class="hljs-comment">// Opt_helperFn</span>
+      [<span class="hljs-string">&#x27;controls_if_elseif&#x27;</span>, <span class="hljs-string">&#x27;controls_if_else&#x27;</span>]
+    );
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">&#x27;Failed to register controls_if_mutator:&#x27;</span>, error);
+  }
+
+  <span class="hljs-comment">// 註冊 mutator 內部使用的積木 (controls_if_if, controls_if_elseif, controls_if_else)</span>
+  <span class="hljs-title class_">Blockly</span>.<span class="hljs-title function_">defineBlocksWithJsonArray</span>([
+    {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;controls_if_if&#x27;</span>,
+      <span class="hljs-attr">message0</span>: <span class="hljs-string">&#x27;if&#x27;</span>,
+      <span class="hljs-comment">// previousStatement and nextStatement for mutator blocks are defined in their init methods below</span>
+      <span class="hljs-attr">colour</span>: <span class="hljs-number">210</span>,
+      <span class="hljs-attr">tooltip</span>: <span class="hljs-string">&#x27;控制 if 區塊的 mutator&#x27;</span>,
+      <span class="hljs-attr">helpUrl</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    },
+    {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;controls_if_elseif&#x27;</span>,
+      <span class="hljs-attr">message0</span>: <span class="hljs-string">&#x27;else if&#x27;</span>,
+      <span class="hljs-comment">// previousStatement and nextStatement for mutator blocks are defined in their init methods below</span>
+      <span class="hljs-attr">colour</span>: <span class="hljs-number">210</span>,
+      <span class="hljs-attr">tooltip</span>: <span class="hljs-string">&#x27;添加 else if 條件&#x27;</span>,
+      <span class="hljs-attr">helpUrl</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    },
+    {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;controls_if_else&#x27;</span>,
+      <span class="hljs-attr">message0</span>: <span class="hljs-string">&#x27;else&#x27;</span>,
+      <span class="hljs-comment">// previousStatement and nextStatement for mutator blocks are defined in their init methods below</span>
+      <span class="hljs-attr">colour</span>: <span class="hljs-number">210</span>,
+      <span class="hljs-attr">tooltip</span>: <span class="hljs-string">&#x27;添加 else 條件&#x27;</span>,
+      <span class="hljs-attr">helpUrl</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    },
+  ]);
+
+  <span class="hljs-comment">// 修正 mutator 內部積木的連接類型，使其能夠正確連接</span>
+  <span class="hljs-comment">// 否則它們在 mutator 工作區中無法連接</span>
+  <span class="hljs-comment">// 這些應該是連接器 (connections)，不是 statement 或 input</span>
+  <span class="hljs-comment">// initSvg 移除後，這些內部積木可能需要額外的連接定義</span>
+  <span class="hljs-comment">// 以便在 mutator 工作區中能夠串聯</span>
+  <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Blocks</span>[<span class="hljs-string">&#x27;controls_if_if&#x27;</span>].<span class="hljs-property">init</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">appendDummyInput</span>().<span class="hljs-title function_">appendField</span>(<span class="hljs-string">&#x27;if&#x27;</span>);
+    <span class="hljs-comment">// 使用 &#x27;controls_if_container_stack&#x27; 作為通用連接類型</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setNextStatement</span>(<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;controls_if_container_stack&#x27;</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setColour</span>(<span class="hljs-number">210</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setTooltip</span>(<span class="hljs-string">&#x27;控制 if 區塊的 mutator&#x27;</span>);
+  };
+
+  <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Blocks</span>[<span class="hljs-string">&#x27;controls_if_elseif&#x27;</span>].<span class="hljs-property">init</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">appendDummyInput</span>().<span class="hljs-title function_">appendField</span>(<span class="hljs-string">&#x27;else if&#x27;</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setPreviousStatement</span>(<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;controls_if_container_stack&#x27;</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setNextStatement</span>(<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;controls_if_container_stack&#x27;</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setColour</span>(<span class="hljs-number">210</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setTooltip</span>(<span class="hljs-string">&#x27;添加 else if 條件&#x27;</span>);
+  };
+
+  <span class="hljs-title class_">Blockly</span>.<span class="hljs-property">Blocks</span>[<span class="hljs-string">&#x27;controls_if_else&#x27;</span>].<span class="hljs-property">init</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">appendDummyInput</span>().<span class="hljs-title function_">appendField</span>(<span class="hljs-string">&#x27;else&#x27;</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setPreviousStatement</span>(<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;controls_if_container_stack&#x27;</span>);
+    <span class="hljs-comment">// else 是最後一個，所以沒有 nextStatement</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setNextStatement</span>(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 明確設定為 false</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setColour</span>(<span class="hljs-number">210</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setTooltip</span>(<span class="hljs-string">&#x27;添加 else 條件&#x27;</span>);
+  };
+}
+</code></pre>
+
+            
+            
+        </body>
+        </html>

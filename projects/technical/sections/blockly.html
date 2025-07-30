@@ -141,8 +141,29 @@
             <h2 id="google-blockly---拼圖建立程式流程">🧱Google Blockly - 拼圖建立程式流程</h2>
 <h3 id="ℹ️內容敘述">ℹ️內容敘述</h3>
 <ul>
-<li>📌 Google's Blockly is a web-based, visual programming editor. Users can drag blocks together to build programs. All code is free and open source.</li>
-<li><a href="https://www.npmjs.com/package/blockly">https://www.npmjs.com/package/blockly</a></li>
+<li>📌 Google's Blockly is a web-based, visual programming editor. Users can drag blocks together to build programs. All code is free and open source. <a href="https://www.npmjs.com/package/blockly">https://www.npmjs.com/package/blockly</a></li>
+<li><a href="./blockly_mutator.html">Blockly Mutator</a> 讓積木能夠根據 user 操作，動態調整其外型與邏輯結構</li>
+<li>整體功能建置方式：
+<ul>
+<li>step 1 建立基礎積木：
+<ul>
+<li>custom.ts 客製化積木, 目前定義 15 個</li>
+<li>logic.ts 邏輯積木, 目前定義 17 個</li>
+<li>loops.ts 迴圈積木, 目前定義 11 個</li>
+<li>test.ts 測試積木, 目前定義 9 個</li>
+</ul>
+</li>
+<li>step 2 建立程式語言產生器：
+<ul>
+<li>依據 <code>基礎積木</code> <code>程式語言語法特性</code> 產生相對應積木名稱的程式碼產生邏輯</li>
+<li>官方支援 <code>javascript</code> <code>php</code> <code>lua</code> <code>python</code> 四種程式語言</li>
+</ul>
+</li>
+<li>step 3 <code>blockMapping.ts</code> → 模組化建立 <code>基礎積木</code> 與 <code>程式語言產生器</code> 之間的對照表</li>
+<li>step 4 <code>toolbox.ts</code> → Vue3 GUI 可組裝分類欄位</li>
+<li>setp 5 <code>workspace.ts</code> → 初始化、加載、儲存等交互邏輯</li>
+</ul>
+</li>
 </ul>
 
             

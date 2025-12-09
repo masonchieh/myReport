@@ -2,7 +2,7 @@
         <html>
         <head>
             <meta charset="UTF-8">
-            <title>&#x2705;&#x5df2;&#x5b8c;&#x6210; PR&lpar;Pull Request&rpar;</title>
+            <title></title>
             <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -138,81 +138,87 @@
         
         </head>
         <body class="vscode-body vscode-light">
-            <h2 id="已完成-prpull-request">✅已完成 PR(Pull Request)</h2>
-<h3 id="frontend-vue3">👥frontend Vue3</h3>
-<details>
-  <summary>show more...</summary>
-  <table>
+            <div style="background-color: #272b50ff; color: #fff; font-size: 1.1em; font-weight: bold; padding: 1em; margin: 1em 0;">
+  <strong>💡提示：</strong>
+<blockquote>
+<h2 id="操作方式">操作方式</h2>
+<ul>
+<li>開啟左側功能選單後，拖曳積木至工作區</li>
+<li>Test Case / Custom / Logic / Loop 四類屬於基本操作，可與任意積木結合</li>
+<li>Property 是自定義屬性值，資料來源可調整，並嵌入適當的積木內</li>
+<li>Image 積木 只允許同類型、同階層積木結合，順序可任意調整</li>
+<li>Algorithm 積木 只允許同類型、同階層積木結合，順序可任意調整</li>
+<li>積木內的屬性值可自行修改，有些屬性值可連動，並且防呆輸入</li>
+<li>屬性值連動，可事先定義，並規定是否鎖定</li>
+</ul>
+</blockquote>
+</div>
+<table>
     <thead>
-      <tr>
-        <th style="background-color: #f2f2f2;">項目</th>
-        <th style="background-color: #f2f2f2;">說明</th>
-      </tr>
+        <tr>
+            <th style="background-color: #f2f2f2;">功能</th>
+            <th style="background-color: #f2f2f2;">說明</th>
+        </tr>
     </thead>
     <tbody>
-      <tr>
-        <td style="text-align:left;font-weight:bold;">Remote Web</td>
-        <td style="text-align:left;">
-          <li>現況 SLT3 單機版</li>
-          <li>提供 WebBase 服務</li>
-          <li>可執行 APIs 指令
-            <br>例如: http://192.168.1.192:1201/api/shutdown 關閉 app
-          </li>
-          <li>
-            <figure>
-              <img src='../../images/LocalRemoteVer.png' />
-              <figcaption align="center">
-                <em>單機 / 遠端</em>
-              </figcaption>
-            </figure>
-          </li>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align:left;font-weight:bold;">Scratch 功能介紹</td>
-        <td style="text-align:left;">
-          <li><a href="./pr_details/upper_func.html">上方功能列表</a></li>
-          <li><a href="./pr_details/left_func.html">左側積木清單</a></li>
-          <li>右側工作區</li>
-          <li>右側狀態頁顯示</li>
-          <li>
-            <figure>
-              <img src='../../images/ScratchGUI.png' />
-              <figcaption align="center">
-                <em>Scratch 功能介紹</em>
-              </figcaption>
-            </figure>
-          </li>
-        </td>
-      </tr>
+        <tr>
+            <td>測試方式 積木</td>
+            <td style="text-align: left; font-weight: bold;">
+                <figure>
+                    <img src='../../../images/leftFn/test_case.png' width='250' />
+                </figure>
+            </td>
+        </tr>
+        <tr>
+            <td>客製化邏輯 積木</td>
+            <td style="text-align: left; font-weight: bold;">
+                <figure>
+                    <img src='../../../images/leftFn/custom.png' width='250' />
+                </figure>
+            </td>
+        </tr>
+        <tr>
+            <td>邏輯控制 積木</td>
+            <td style="text-align: left; font-weight: bold;">
+                <figure>
+                    <img src='../../../images/leftFn/logic.png' width='250' />
+                </figure>
+            </td>
+        </tr>
+        <tr>
+            <td>迴圈控制 積木</td>
+            <td style="text-align: left; font-weight: bold;">
+                <figure>
+                    <img src='../../../images/leftFn/loop.png' width='250' />
+                </figure>
+            </td>
+        </tr>
+        <tr>
+            <td>自定義屬性 積木</td>
+            <td style="text-align: left; font-weight: bold;">
+                <figure>
+                    <img src='../../../images/leftFn/properties.png' width='250' />
+                </figure>
+            </td>
+        </tr>
+        <tr>
+            <td>Image 積木</td>
+            <td style="text-align: left; font-weight: bold;">
+                <figure>
+                    <img src='../../../images/leftFn/images.png' width='250' />
+                </figure>
+            </td>
+        </tr>
+        <tr>
+            <td>Algorithm 積木</td>
+            <td style="text-align: left; font-weight: bold;">
+                <figure>
+                    <img src='../../../images/leftFn/algorithm.png' width='250' />
+                </figure>
+            </td>
+        </tr>
     </tbody>
-  </table>
-</details>
-<hr>
-<h3 id="️backend-rust">🗄️backend Rust</h3>
-<details>
-  <summary>show more...</summary>
-  <table>
-    <thead>
-      <tr>
-        <th style="background-color: #f2f2f2;">項目</th>
-        <th style="background-color: #f2f2f2;">說明</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="text-align:left;font-weight:bold;">
-          提供 APIs
-        </td>
-        <td style="text-align:left;">
-          <li>Remote：HTTP POST/GET/PUT/DELETE</li>
-          <li>Local：tauri IPC</li>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</details>
-
+</table>
             
             
         </body>
